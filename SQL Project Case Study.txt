@@ -1,0 +1,78 @@
+---------------------Table Creation----------------------
+
+CREATE TABLE orders (
+    customer_id INT,
+    order_date DATE,
+    item VARCHAR(100),
+    quantity INT,
+    price DECIMAL(10, 2)
+);
+
+--------------------Inserting Values----------------------
+
+INSERT INTO orders (customer_id, order_date, item, quantity, price)
+VALUES
+    (10330, '1999-06-30', 'Pogo stick', 1, 28.00),
+    (10101, '1999-06-30', 'Raft', 1, 58.00),
+    (10298, '1999-07-01', 'Skateboard', 1, 33.00),
+    (10101, '1999-07-01', 'Life Vest', 4, 125.00),
+    (10299, '1999-07-06', 'Parachute', 1, 1250.00),
+    (10339, '1999-07-27', 'Umbrella', 1, 4.50),
+    (10449, '1999-08-13', 'Unicycle', 1, 180.79),
+    (10439, '1999-08-14', 'Ski Poles', 2, 25.50),
+    (10101, '1999-08-18', 'Rain Coat', 1, 18.30),
+    (10449, '1999-09-01', 'Snow Shoes', 1, 45.00),
+    (10439, '1999-09-18', 'Tent', 1, 88.00),
+    (10298, '1999-09-19', 'Lantern', 2, 29.00),
+    (10410, '1999-10-28', 'Sleeping Bag', 1, 89.22),
+    (10438, '1999-11-01', 'Umbrella', 1, 6.75),
+    (10438, '1999-11-02', 'Pillow', 1, 8.50),
+    (10298, '1999-12-01', 'Helmet', 1, 22.00),
+    (10449, '1999-12-15', 'Bicycle', 1, 380.50),
+    (10449, '1999-12-22', 'Canoe', 1, 280.00),
+    (10101, '1999-12-30', 'Hoola Hoop', 3, 14.75),
+    (10330, '2000-01-01', 'Flashlight', 4, 28.00),
+    (10101, '2000-01-02', 'Lantern', 1, 16.00),
+    (10299, '2000-01-18', 'Inflatable Mattress', 1, 38.00),
+    (10438, '2000-01-18', 'Tent', 1, 79.99),
+    (10413, '2000-01-19', 'Lawnchair', 4, 32.00),
+    (10410, '2000-01-30', 'Unicycle', 1, 192.50),
+    (10315, '2000-02-02', 'Compass', 1, 8.00),
+    (10449, '2000-02-29', 'Flashlight', 1, 4.50),
+    (10101, '2000-03-08', 'Sleeping Bag', 2, 88.70),
+    (10298, '2000-03-18', 'Pocket Knife', 1, 22.38),
+    (10449, '2000-03-19', 'Canoe paddle', 2, 40.00),
+    (10298, '2000-04-01', 'Ear Muffs', 1, 12.50),
+    (10330, '2000-04-19', 'Shovel', 1, 16.75);
+
+-------------------------Case Study Questions & Answers------------------------
+
+-- 1. Select a list of all items purchased for customerid 10449.
+-- (SELECT * FROM orders WHERE customer_id = 10449;)
+
+-- 2. Select the avg price of all of the items ordered that were purchased in the month of Dec.
+-- SELECT AVG(price) FROM orders WHERE order_date LIKE "%-12-%";
+
+-- 3. For all of the tents that were ordered, What is the price of the lowest tent?
+-- SELECT MIN(price) FROM orders WHERE item = 'Tent';
+
+-- 4. Select the item, maximum price, and minimum price for each specific item in the table.
+-- SELECT item, MAX(price), MIN(Price) FROM orders GROUP BY item;
+
+-- 5. Display the results if the maximum price for one of the items is greater than 190.00.
+-- SELECT item, MAX(price) FROM orders GROUP BY item Having MAX(price) > 190.00;
+
+-- 6. Select the item and price for all of the items where the price is greater than 10.00. Display the results in Ascending order based on the price.
+-- SELECT item, price FROM orders WHERE price > 10.00 ORDER BY price ASC;
+
+-- 7. Select the customer_id, order_date, and item unless they are not ‘Snow Shoes’ or ‘Ear Muffs’
+-- Select customer_id, order_date, item From orders Where (item <> 'Snow Shoes') AND (item <> 'Ear Muffs');
+
+-- 8. Select the item and price of all items that start with the letters ‘S’ & ‘P’.
+-- Select item, price from orders WHERE (item LIKE '%S%') AND (item LIKE '%P%');
+
+-- 9. Select the date, item, and price from the table that have a price value ranging from 10.00 to 80.00.
+-- Select order_date, item, price from orders Where price BETWEEN 10.00 AND 80.00;
+
+-- 10. Select the item and per unit price for each item in the table.
+-- Select item, Sum(price) / Sum(quantity) as unit_price from orders Group By item Order By unit_price DESC;
